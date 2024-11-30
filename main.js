@@ -110,14 +110,9 @@ async function main() {
     displayskw();
     await delay(2000);
     displayskw2();
+    await delay(5000);
 
-    const tokens = readTokens();
-    const output = new Output();
-    
-    for (let i = 0; i < tokens.length; i++) {
-        await sendRequest(i, output);
-        await spinnerDelay(5);
-    }
+    await startBot();
 }
 
 
