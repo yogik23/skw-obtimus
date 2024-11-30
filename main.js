@@ -110,7 +110,7 @@ async function main() {
     displayskw();
     await delay(2000);
     displayskw2();
-    await delay(5000);
+    await delay(3000);
 
     await startBot();
 }
