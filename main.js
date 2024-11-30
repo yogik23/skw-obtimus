@@ -3,7 +3,7 @@ const fs = require('fs');
 const Table = require('cli-table3');
 const ora = require('ora');
 const userAgents = require('./skw/userAgents');
-const { displayskw } = require('./skw/diskw');
+const { displayskw, displayskw2 } = require('./skw/diskw');
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -24,7 +24,7 @@ async function sendRequest(index, output) {
     const headers = {
         "Authorization": token,
         "Content-Type": "application/json",
-        "User-Agent": userAgents[index] 
+        "User-Agent": userAgents[index]
     };
 
     try {
@@ -33,7 +33,8 @@ async function sendRequest(index, output) {
         const user = response.data.user;
         if (user) {
             const { nickName, totalRwd, totalKill, totalWin } = user;
-            output.addRow('Sukses', nickName, totalRwd, totalKill, totalWin);
+            const NickNama = nickName.split(' ').slice(0, 2).join(' ');
+            output.addRow('Sukses', NickNama, totalRwd, totalKill, totalWin);
         } else {
             output.addRow('Gagal', 'N/A', 'N/A', 'N/A', 'N/A');
         }
@@ -74,7 +75,7 @@ class Output {
     }
 }
 
-async function startCD(seconds) {
+async function spinnerDelay(seconds) {
     const spinner = ora().start();
 
     return new Promise((resolve) => {
@@ -92,17 +93,32 @@ async function startCD(seconds) {
     });
 }
 
-async function main() {
-    console.clear();
-    displayskw();
-    await delay(5000);
+async function startBot() {
     const tokens = readTokens();
     const output = new Output();
     
     for (let i = 0; i < tokens.length; i++) {
         await sendRequest(i, output);
-        await startCD(5);
+        await spinnerDelay(5);
+    }
+
+    startBot();
+}
+
+async function main() {
+    console.clear();
+    displayskw();
+    await delay(2000);
+    displayskw2();
+
+    const tokens = readTokens();
+    const output = new Output();
+    
+    for (let i = 0; i < tokens.length; i++) {
+        await sendRequest(i, output);
+        await spinnerDelay(5);
     }
 }
+
 
 main();
