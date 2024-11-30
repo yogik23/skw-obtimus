@@ -9,7 +9,7 @@ const { displayskw, displayskw2 } = require('./skw/diskw');
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function readTokens() {
-    const data = fs.readFileSync('tokens.json', 'utf8');
+    const data = fs.readFileSync('dataSKW.json', 'utf8');
     return JSON.parse(data);
 }
 
