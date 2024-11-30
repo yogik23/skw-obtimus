@@ -72,8 +72,7 @@ function moveMessage(message) {
     setTimeout(() => {
         clearInterval(intervalId);
         console.clear();
-        console.log('Animasi selesai setelah 5 detik.');
-    }, 5000);
+    }, 3000);
 }
 
 async function displayskw2() {
