@@ -35,7 +35,7 @@ nano dataSKW.json
 ```
 **4. Jalankan Bot**
 ```
-npm gas
+npm run gas
 ```
    atau
 ```
