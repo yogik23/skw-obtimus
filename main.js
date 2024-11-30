@@ -1,6 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 const Table = require('cli-table3');
+const chalk = require('chalk');
 const ora = require('ora');
 const userAgents = require('./skw/userAgents');
 const { displayskw, displayskw2 } = require('./skw/diskw');
@@ -48,7 +49,13 @@ async function sendRequest(index, output) {
 class Output {
     constructor() {
         this.table = new Table({
-            head: ['Status', 'NickName', 'Rwd', 'Kill', 'Win'],
+            head: [
+                chalk.hex('#C0C0C0')('Status'), 
+                chalk.hex('#C0C0C0')('NickName'), 
+                chalk.hex('#C0C0C0')('Rwd'), 
+                chalk.hex('#C0C0C0')('Kill'), 
+                chalk.hex('#C0C0C0')('Win')
+            ],
             colWidths: [12, 30, 15, 10, 10],
             style: {
                 head: ['cyan'],
@@ -61,11 +68,21 @@ class Output {
 
     addRow(status, nickName, rwd, kill, win) {
         this.table.push([
-            status === 'Sukses' ? '✔ Sukses' : '❌ Gagal',
-            status === 'Sukses' ? nickName : 'N/A',
-            status === 'Sukses' ? rwd : 'N/A',
-            status === 'Sukses' ? kill : 'N/A',
-            status === 'Sukses' ? win : 'N/A'
+            status === 'Sukses' 
+                ? chalk.hex('#3CB371')('✔ Sukses') 
+                : chalk.red('❌ Gagal'),
+            status === 'Sukses' 
+                ? chalk.hex('#00FFFF')(nickName) 
+                : chalk.hex('#00FFFF')('N/A'),
+            status === 'Sukses' 
+                ? chalk.hex('#F0E68C')(rwd) 
+                : chalk.hex('#F0E68C')('N/A'),
+            status === 'Sukses' 
+                ? chalk.hex('#DC143C')(kill) 
+                : chalk.hex('#DC143C')('N/A'),
+            status === 'Sukses' 
+                ? chalk.hex('#8A2BE2')(win) 
+                : chalk.hex('#8A2BE2')('N/A')
         ]);
     }
 
@@ -110,7 +127,7 @@ async function main() {
     displayskw();
     await delay(2000);
     displayskw2();
-    await delay(3000);
+    await delay(2000);
 
     await startBot();
 }
