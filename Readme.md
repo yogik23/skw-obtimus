@@ -49,7 +49,7 @@ node main.js
 1. buka web obtimus 
 2. Klik kanan inspect / ctrl shit + i 
 3. Network 
-4. Api join 
+4. Api join > Headers
 5. Scroll sampai ke authorization
 6. Copy semua
 
