@@ -5,6 +5,8 @@ const ora = require('ora');
 const userAgents = require('./skw/userAgents');
 const { displayskw } = require('./skw/diskw');
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 function readTokens() {
     const data = fs.readFileSync('tokens.json', 'utf8');
     return JSON.parse(data);
@@ -72,7 +74,7 @@ class Output {
     }
 }
 
-async function spinnerDelay(seconds) {
+async function startCD(seconds) {
     const spinner = ora().start();
 
     return new Promise((resolve) => {
@@ -93,12 +95,13 @@ async function spinnerDelay(seconds) {
 async function main() {
     console.clear();
     displayskw();
+    await delay(3);
     const tokens = readTokens();
     const output = new Output();
     
     for (let i = 0; i < tokens.length; i++) {
         await sendRequest(i, output);
-        await spinnerDelay(5);
+        await startCD(5);
     }
 }
 
