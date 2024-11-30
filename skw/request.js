@@ -2,7 +2,7 @@ const axios = require('axios');
 const Table = require('cli-table3');
 const ora = require('ora');
 const userAgents = require('./userAgents');
-const { getToken } = require('./tokens');
+const { getToken } = require('../tokens');
 
 async function sendRequest(index, output) {
     const url = "https://api2.glbgpt.com/ao-api/permble/join";
