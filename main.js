@@ -95,7 +95,7 @@ async function startCD(seconds) {
 async function main() {
     console.clear();
     displayskw();
-    await delay(3);
+    await delay(5000);
     const tokens = readTokens();
     const output = new Output();
     
